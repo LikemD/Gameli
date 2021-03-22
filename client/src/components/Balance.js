@@ -1,19 +1,20 @@
 import React , { useContext } from 'react';
 import { numberWithCommas } from '../utils/formats';
+import '../App.css';
 
 
 import { GlobalContext } from '../context/GlobalState';
 
 const Balance = () => {
-    const { transactions } = useContext(GlobalContext);
+    const { transactions , username} = useContext(GlobalContext);
     const amounts  = transactions.map( transaction => transaction.amount );
     const total = amounts.reduce((acc,item) => (acc += item),0).toFixed(2); 
 
     return (
-        <>
-            <h4>Your Balance</h4>
+        <div className='container'>
+            <h4>Hi {username}, Your Account Balance</h4>
             <h1 id='balance'>${numberWithCommas(total)}</h1>
-        </>
+        </div>
         
     )
 }

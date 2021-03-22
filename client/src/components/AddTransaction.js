@@ -1,5 +1,6 @@
 import React , { useState , useContext } from 'react';
 import {v4 as uuid} from 'uuid';
+import '../App.css';
 
 
 import { GlobalContext } from '../context/GlobalState';
@@ -8,13 +9,14 @@ const AddTransaction = () => {
     const [text , setText] = useState('');
     const [amount , setAmount ] = useState(0);
 
-    const { addTransaction } = useContext(GlobalContext);
+    const { addTransaction , userId } = useContext(GlobalContext);
 
     const onSubmit = (e) => {
         e.preventDefault();
 
         const newTransaction = {
             id: uuid(),
+            userId,
             text,
             amount: +amount
         }
@@ -25,7 +27,7 @@ const AddTransaction = () => {
     }
 
     return (
-        <div>
+        <div className='container'>
             <h3>Add New Transaction</h3>
             <form onSubmit={onSubmit}>
                 <div className='form-control'>

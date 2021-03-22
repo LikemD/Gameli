@@ -12,6 +12,7 @@ dotenv.config({path:'./config/config.env'});
 connectDB();
 
 const txnRouter = require('./routes/transationRoute');
+const userRouter = require('./routes/userRoutes');
 
 
 app.use(express.json());
@@ -21,6 +22,7 @@ if(process.env.NODE_ENV == 'development'){
 
 
 // transaction router
+app.use('/api/v1/users',userRouter);
 app.use('/api/v1/txns', txnRouter);
 
 //static file server

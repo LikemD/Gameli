@@ -1,25 +1,13 @@
 import React from 'react';
-import './App.css';
+//import './App.css';
 
-import Header from './components/Header';
-import Balance from './components/Balance';
-import ProfitLoss from './components/ProfitLoss';
-import TransactionList from './components/TransactionList';
-import AddTransaction from './components/AddTransaction';
-
-import GlobalProvider from './context/GlobalState';
+import UserPage from './components/UserPage';
+import UserAction from './components/UserAction';
 
 function App() {
   return (
-    <GlobalProvider>
-      <Header />
-      <div id='container'>
-        <Balance />
-        <ProfitLoss />
-        <TransactionList />
-        <AddTransaction />
-      </div>
-    </GlobalProvider>
+    <UserPage/>
+    //<UserAction />
   );
 }
 

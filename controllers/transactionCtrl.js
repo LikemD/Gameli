@@ -1,6 +1,6 @@
 const Transactions = require('../models/transactionModel');
 //@desc GET all txns
-//@endpoint GET /api/v1/txns
+//@endpoint GET /api/v1/txns/:userId
 //@access Public
 exports.getTransactions = async (req, res, next) => {
     try {
@@ -19,7 +19,7 @@ exports.getTransactions = async (req, res, next) => {
 };
 
 //@desc ADD txns
-//@endpoint POST /api/v1/txns
+//@endpoint POST /api/v1/txns/:userId
 //@access Public
 exports.addTransactions = async (req, res, next) => {
     try {

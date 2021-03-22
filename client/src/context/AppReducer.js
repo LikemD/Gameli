@@ -4,7 +4,7 @@ export default (state , action) => {
                         return{
                                 ...state,
                                 loading: false,
-                                transactions: action.payload
+                                transactions: action.payload.filter(item=>item.userId === state.userId)
                         }
                 case 'DELETE_TXN':
                         return{
@@ -21,7 +21,13 @@ export default (state , action) => {
                                 ...state,
                                 error: action.payload
                         }
-            default:
+                case 'LOGIN':
+                        return{
+                                ...state,
+                                userId: action.payload._id,
+                                username: action.payload.username
+                        }
+                default:
                 return state;
         }
 }

@@ -1,5 +1,6 @@
 import React , { useContext }from 'react';
 import { numberWithCommas } from '../utils/formats';
+import '../App.css';
 
 import {GlobalContext} from '../context/GlobalState';
 
