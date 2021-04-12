@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
@@ -8,6 +8,8 @@ import { Grid , Button} from '@material-ui/core';
 
 
 export const UserAction = (props) => {
+  const [open,setOpen] = useState(false)
+
   const handleSignIn = () => {
     props.loginStep()
   }
@@ -16,15 +18,19 @@ export const UserAction = (props) => {
     props.registerStep()
   }
 
+  const handleOpen = () => {
+    setOpen(!open)
+  }
+
   return (
       <React.Fragment>
         <AppBar position="static">
             <Toolbar>
-              <IconButton edge="start" className={{marginRight:"theme.spacing(2)"}} color="inherit" aria-label="menu">
-                  <MenuIcon />
+              <IconButton edge="start" color="inherit" aria-label="menu" onClick={handleOpen}>
+                  <MenuIcon open={open}/>
               </IconButton>
-              <Typography variant="h6" className={{flexGrow:"1"}}>
-                  Enter User Details
+              <Typography variant="h6">
+                  Sign Up
               </Typography>
             </Toolbar>
         </AppBar>

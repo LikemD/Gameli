@@ -4,11 +4,11 @@ import axios from 'axios';
 
 const initialState = {
     transactions: [],
-    username: '',
-    password: '',
+    firstName: '',
     userId: '',
     error: null,
-    loading: true
+    loading: true,
+    step: 1
 };
 // create context
 export const GlobalContext = createContext(initialState);
@@ -74,13 +74,10 @@ export const GlobalProvider = ({ children }) => {
     async function login(data){
         try {
             const res = await axios.post('api/v1/users/login' , data)
-            console.log(res);
-            //const currentUser = res.data.data.filter(item=> item.username === username)[0]
             dispatch({
                 type: 'LOGIN',
                 payload: res.data.data
             })
-            console.log(state);
         } catch (error) {
             dispatch({
                 type: 'GET_ERR',
@@ -89,15 +86,32 @@ export const GlobalProvider = ({ children }) => {
         }
     }
 
+    async function dateFilter(sDate , eDate){
+        const startDate = new Date(sDate)
+        const endDate = new Date(eDate)
+
+        try {
+           const res = await axios.get('api/v1/txns/sortDate' , {params: {startDate , endDate}})
+            dispatch({
+                type: 'DATE_FILTER',
+                payload: res.data.data
+            })      
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     async function register(data){
         if(data){
             try {
                 const res = await axios.post('api/v1/users/register', data);
+                if(res) console.log('success')
             } catch (error) {
                 console.log(error)
             }
         }
     }
+
 
     return (
         <GlobalContext.Provider value={{
@@ -105,12 +119,14 @@ export const GlobalProvider = ({ children }) => {
             error: state.error,
             loading: state.loading,
             userId: state.userId,
-            username: state.username,
+            firstName: state.firstName,
+            step: state.step,
             deleteTransaction,
             addTransaction,
             getTxns,
             login,
-            register
+            register,
+            dateFilter
             }}>
             {children}
         </GlobalContext.Provider>

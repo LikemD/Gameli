@@ -24,8 +24,15 @@ export default (state , action) => {
                 case 'LOGIN':
                         return{
                                 ...state,
+                                step: 4,
                                 userId: action.payload._id,
-                                username: action.payload.username
+                                firstName: action.payload.firstName
+                        }
+                case 'DATE_FILTER':
+                        return{
+                                ...state,
+                                transactions: action.payload.filter(item => item.userId === state.userId)
+                                
                         }
                 default:
                 return state;

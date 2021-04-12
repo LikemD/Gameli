@@ -41,19 +41,19 @@ export const Login = (props) => {
         <React.Fragment>
             <AppBar position="static">
                 <Toolbar>
-                <IconButton edge="start" className={{marginRight:"theme.spacing(2)"}} color="inherit" aria-label="menu">
+                <IconButton edge="start" color="inherit" aria-label="menu">
                     <MenuIcon />
                 </IconButton>
-                <Typography variant="h6" className={{flexGrow:"1"}}>
+                <Typography variant="h6">
                     Enter User Details
                 </Typography>
                 </Toolbar>
             </AppBar>
-            <Grid container justify="center" className={{marginTop:"theme.spacing(2)"}}>
+            <Grid container justify="center">
                 <Box mx="auto">
                     <TextField
-                    id='standard-basic' 
-                    hintText = 'Enter Your Username'
+                    id='standard-basic-username' 
+                    hinttext = 'Enter Your Username'
                     label = 'Username'
                     name = 'username'
                     onChange={handleChange}
@@ -61,8 +61,8 @@ export const Login = (props) => {
                     />
                     <br />
                     <TextField
-                    id='standard-basic' 
-                    hintText = 'Enter Your Password'
+                    id='standard-basic-password' 
+                    hinttext = 'Enter Your Password'
                     label = 'Password'
                     name = 'password'
                     onChange={handleChange}

@@ -14,6 +14,7 @@ import Login from './Login';
 import Register from './Register';
 
 class UserPage extends React.Component{
+
   state= {
     step: 1
   }
@@ -78,6 +79,8 @@ class UserPage extends React.Component{
               </div>
           </GlobalProvider>
         )
+      default:
+        return
     }
   }
 }

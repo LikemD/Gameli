@@ -1,6 +1,6 @@
 const Transactions = require('../models/transactionModel');
 //@desc GET all txns
-//@endpoint GET /api/v1/txns/:userId
+//@endpoint GET /api/v1/txns
 //@access Public
 exports.getTransactions = async (req, res, next) => {
     try {
@@ -19,7 +19,7 @@ exports.getTransactions = async (req, res, next) => {
 };
 
 //@desc ADD txns
-//@endpoint POST /api/v1/txns/:userId
+//@endpoint POST /api/v1/txns
 //@access Public
 exports.addTransactions = async (req, res, next) => {
     try {
@@ -67,3 +67,29 @@ exports.deleteTransactions = async (req, res, next) => {
         });  
     }
 };
+
+//@desc FindByDate txn
+//@endpoint FindByDate /api/v1/txns
+//@access Public
+
+exports.sortTransactions = async (req , res) => {
+    const {startDate , endDate} = req.query
+    if (endDate > startDate){
+        try{
+            const transactions = await Transactions.find({
+                transactionDate: {
+                    $gte: new Date(startDate),
+                    $lt: new Date(endDate)
+                }
+            }).sort({
+                transactionDate: 'asc'
+            })
+            if(!transactions) res.status(500).json({success: false , error: 'Sort Failed'})
+            res.status(200).json({success: true , data: transactions})
+        } catch (error) {
+            res.status(500).json({success: false , error: 'Server Error'})
+        }
+    } else {
+        console.log('endDate older than startDate') 
+    }
+}

@@ -18,9 +18,11 @@ import {GlobalContext} from '../context/GlobalState';
 export const Register = (props) => {
   const [state , setState] = useState({
       username: '',
-      password: ''
+      password: '',
+      firstName: '',
+      lastName: ''
   })
-  const { register } = useContext(GlobalContext)
+  const { register  } = useContext(GlobalContext)
   
   const handleChange = e => {
     const value = e.target.value
@@ -31,7 +33,7 @@ export const Register = (props) => {
   }
   
   const handleRegister = async() => {
-    register({username: state.username , password: state.password})
+    register({username: state.username , password: state.password , firstName: state.firstName , lastName: state.lastName})
     const agree = window.confirm('Registration complete. Press OK to go to login')
     if (agree) handleBack()
   }
@@ -44,19 +46,36 @@ export const Register = (props) => {
     <React.Fragment>
         <AppBar position="static">
             <Toolbar>
-            <IconButton edge="start" className={{marginRight:"theme.spacing(2)"}} color="inherit" aria-label="menu">
+            <IconButton edge="start" color="inherit" aria-label="menu">
                 <MenuIcon />
             </IconButton>
-            <Typography variant="h6" className={{flexGrow:"1"}}>
+            <Typography variant="h6" >
                 Enter User Details
             </Typography>
             </Toolbar>
         </AppBar>
-        <Grid container justify="center" className={{marginTop:"theme.spacing(2)"}}>
+        <Grid container justify="center">
           <Box>
+          <TextField
+            id='standard-basic-firstName'
+            label = 'First Name'
+            name='firstName'
+            onChange={handleChange}
+            value = {state.firstName}
+            />
+            <br/>
             <TextField
-            id='standard-basic' 
-            hintText = 'Enter Your Username'
+            id='standard-basic-lastName' 
+            hinttext = 'Enter Your Last Name'
+            label = 'Last Name'
+            name='lastName'
+            onChange={handleChange}
+            value = {state.lastName}
+            />
+            <br/>
+            <TextField
+            id='standard-basic-username' 
+            hinttext = 'Enter Your Username'
             label = 'Username'
             name='username'
             onChange={handleChange}
@@ -64,8 +83,8 @@ export const Register = (props) => {
             />
             <br/>
             <TextField
-            id='standard-basic' 
-            hintText = 'Password'
+            id='standard-basic-password' 
+            hinttext = 'Password'
             label = 'Password'
             name='password'
             onChange={handleChange}
